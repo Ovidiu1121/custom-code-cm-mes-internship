@@ -1,0 +1,35 @@
+<cmf-core-controls-wizard [cmf-core-business-controls-transaction-wizard]="instance"
+    i18n-mainTitle="@@test-library/wizard-edit-material-attributes#TITLE"
+    mainTitle="Edit Material Attributes"
+    i18n-action-name="@@test-library/wizard-edit-material-attributes#ACTION"
+    action-name="Finish">
+
+    <!-- Wizard steps -->
+    <cmf-core-controls-wizard-step
+        i18n-mainTitle="@@test-library/wizard-edit-material-attributes#DETAILS"
+        mainTitle="Details">
+        <cmf-core-business-controls-propertyEditor
+    label="Batch Type"
+    valueType="String"
+    [(value)]="batchType">
+</cmf-core-business-controls-propertyEditor>
+
+<cmf-core-business-controls-propertyEditor
+    label="Package Type"
+    valueType="String"
+    [(value)]="packageType">
+</cmf-core-business-controls-propertyEditor>
+
+<cmf-core-business-controls-propertyEditor
+    label="Production Priority"
+    valueType="Integer"
+    [(value)]="productionPriority">
+</cmf-core-business-controls-propertyEditor>
+
+<cmf-core-business-controls-propertyEditor
+    label="Quality Comment"
+    valueType="String"
+    [(value)]="qualityComment">
+</cmf-core-business-controls-propertyEditor>
+    </cmf-core-controls-wizard-step>
+</cmf-core-controls-wizard>

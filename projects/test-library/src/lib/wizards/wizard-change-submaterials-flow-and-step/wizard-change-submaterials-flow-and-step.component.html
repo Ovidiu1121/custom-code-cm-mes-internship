@@ -1,0 +1,56 @@
+<cmf-core-controls-wizard [cmf-core-business-controls-transaction-wizard]="instance"
+    i18n-mainTitle="@@test-library/wizard-bulk-step-update#TITLE" mainTitle="Bulk Step Update"
+    i18n-action-name="@@test-library/wizard-bulk-step-update#ACTION" action-name="Finish">
+ 
+    <!-- Wizard steps -->
+    <cmf-core-controls-wizard-step id="detailsStep" i18n-mainTitle="@@test-library/wizard-bulk-step-update#DETAILS"
+        mainTitle="Details">
+ 
+        <div class="wizard-content">
+            <label>Flow: </label>
+            <cmf-core-controls-comboBox [data]="flows" name-field="Name" [(value)]="selectedFlow" [required]="true"
+                (valueChange)="onFlowChanged()" placeholder="Select Flow">
+            </cmf-core-controls-comboBox>
+ 
+            <label>Step: </label>
+            <cmf-core-controls-comboBox [data]="steps" name-field="Name" [(value)]="selectedStep" [required]="true"
+                [disabled]="!selectedFlow" placeholder="Select Step">
+            </cmf-core-controls-comboBox>
+ 
+            <cmf-core-business-controls-propertyEditor label="Change for all submaterials" valueType="Boolean"
+                [(value)]="changeForAllSubmaterials">
+            </cmf-core-business-controls-propertyEditor>
+        </div>
+    </cmf-core-controls-wizard-step>
+ 
+    <cmf-core-controls-wizard-step id="submaterialsStep" mainTitle="Submaterials">
+        <div *ngIf="changeForAllSubmaterials" class="all-submaterials-message">
+            Changes will be applied to all submaterials.
+        </div>
+ 
+        <div *ngIf="!changeForAllSubmaterials" class="submaterials-layout">
+            <div class="grid-container">
+                <cmf-core-controls-dataGrid
+    [showHeader]="true"
+    [hideSelectAllOption]="false"
+    [keepSelection]="true"
+    [dataSource]="kendoDataSource"
+    [columns]="columns"
+    [selectionMode]="selectionMode"
+    (selectedChange)="onGridSelectionChanged()"
+    [(selected)]="selectedLines"
+    title="Submaterials"
+    [pageable]="isPageable"
+    [pageSizes]="[10, 25, 125]">
+</cmf-core-controls-dataGrid>
+            </div>
+            <div class="columnview-container">
+               <cmf-core-controls-columnView
+    [model]="columnViewModel"
+    (remove)="onRemoveFromColumnView($event)">
+</cmf-core-controls-columnView>
+            </div>
+        </div>
+    </cmf-core-controls-wizard-step>
+ 
+</cmf-core-controls-wizard>
